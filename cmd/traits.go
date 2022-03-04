@@ -106,13 +106,17 @@ Then after running 'nftool traits dump', you can change the chance of a trait no
 	}
 
 	// traits merge
+	// combine traits @Stellar
 	traitsMergeCmd = &cobra.Command{
 		Use:   "merge",
 		Short: "Merge multiple attributes files in one, ignoring collisions",
 		Example: `nftool traits merge \
-	--file ./collection_1.json \
-	--file ./collection_2.json \
-	--out ./collection_merged.json`,
+	--file ./collection-legendary.json \
+	--file ./collection-epic.json \
+	--file ./collection-unique.json \
+	--file ./collection-rare.json \
+	--file ./collection-common.json \
+	--out ./collection.json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := traits.MergeCollections(traitsPaths, traitsOut); err != nil {
 				return err
