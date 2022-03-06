@@ -8,10 +8,12 @@ import (
 )
 
 type MetadataItem struct {
-	Name         string            `json:"name"`
-	Description  string            `json:"description"`
-	Image        string            `json:"image"`
-	ExternalLink string            `json:"external_link"`
+	Name            string            `json:"name"`
+	Description     string            `json:"description"`
+	Image           string            `json:"image"`
+	ExternalLink    string            `json:"external_link"`
+	BackgroundColor string         `json:"background_color"`
+	AnimationUrl    string            `json:"animation_url"`
 	Attributes   traits.TraitGroup `json:"attributes"`
 }
 
@@ -19,7 +21,7 @@ type MetadataItem struct {
 // My Collection #{id}
 // https://mycollection.com/token/{id}
 
-func GenerateMetadata(collection traits.TraitCollection, name, description, image, externalLink string) []MetadataItem {
+func GenerateMetadata(collection traits.TraitCollection, name, description, image, externalLink, backgroundColor, animationUrl string) []MetadataItem {
 	metadata := []MetadataItem{}
 
 	for i, attrs := range collection {
@@ -29,6 +31,8 @@ func GenerateMetadata(collection traits.TraitCollection, name, description, imag
 			Description:  subPlaceholders(description, id),
 			Image:        subPlaceholders(image, id),
 			ExternalLink: subPlaceholders(externalLink, id),
+			BackgroundColor: subPlaceholders(backgroundColor, id),
+			AnimationUrl: subPlaceholders(animationUrl, id),
 			Attributes:   attrs,
 		}
 		metadata = append(metadata, item)

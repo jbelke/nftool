@@ -36,6 +36,7 @@ Inside the folder, each directory is a Layer, and you should name them following
 "Body" will be on top of "Background"
 "Face" on top of "Body"
 "Facial Hair" on top of "Face"
+"Larger Number is closer to user's perspective"
 
 2. Layer Variant Names and Rarity
 
@@ -75,15 +76,16 @@ Then after running 'nftool traits dump', you can change the chance of a trait no
 		},
 	}
 
-	// traits make
+	// traits maker
+	// @Stellar
 	traitsMakeAmount int
 	traitsMakeCmd    = &cobra.Command{
 		Use:   "make",
 		Short: "Generate a collection from a config file or a folder with the structured layers.",
 		Example: `nftool traits make \
 	--amount 10 \
-	--config ./config.yaml \
-	--out ./collection.json`,
+	--config ./out/config.yaml \
+	--out ./out/collection.json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := traits.GenerateTraitCollection(traitsPath, traitsOut, traitsMakeAmount); err != nil {
 				return err
@@ -96,7 +98,7 @@ Then after running 'nftool traits dump', you can change the chance of a trait no
 	traitsShuffleCmd = &cobra.Command{
 		Use:     "shuffle",
 		Short:   "shuffle a collection json",
-		Example: `nftool traits shuffle --path ./collection.json`,
+		Example: `nftool traits shuffle --path ./out/collection.json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := traits.ShuffleCollection(traitsPath); err != nil {
 				return err
@@ -111,12 +113,12 @@ Then after running 'nftool traits dump', you can change the chance of a trait no
 		Use:   "merge",
 		Short: "Merge multiple attributes files in one, ignoring collisions",
 		Example: `nftool traits merge \
-	--file ./collection-legendary.json \
-	--file ./collection-epic.json \
-	--file ./collection-unique.json \
-	--file ./collection-rare.json \
-	--file ./collection-common.json \
-	--out ./collection.json`,
+	--file ./out/collection-legendary.json \
+	--file ./out/collection-epic.json \
+	--file ./out/collection-unique.json \
+	--file ./out/collection-rare.json \
+	--file ./out/collection-common.json \
+	--out  ./out/collection.json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := traits.MergeCollections(traitsPaths, traitsOut); err != nil {
 				return err

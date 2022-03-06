@@ -6,6 +6,7 @@ import (
 	"image/draw"
 	"image/jpeg"
 	"image/png"
+	"image/gif"
 	"os"
 	"runtime"
 	"sync"
@@ -71,12 +72,14 @@ func GenerateManyImagesFromCollectionAttributesParallel(width, height, startingI
 	return nil
 }
 
-func GenerateManyImagesFromCollectionAttributes(width, height, startingIndex int, collectionAttributes []traits.TraitGroup, layersMap map[string]string, outputDir string, saveAsPng, transparent bool) error {
+func GenerateManyImagesFromCollectionAttributes(width, height, startingIndex int, collectionAttributes []traits.TraitGroup, layersMap map[string]string, outputDir string, saveAsPng, saveAsGif, transparent bool) error {
 	for i, traitGroup := range collectionAttributes {
 		var extension string
 		if saveAsPng {
 			extension = "png"
-		} else {
+		} else if saveAsGif{
+			extension = "gif"
+		}else {
 			extension = "jpg"
 		}
 		out := fmt.Sprintf("%s/%d.%s", outputDir, startingIndex+i, extension)
@@ -101,6 +104,8 @@ func GenerateMissingImagesFromCollectionAttributes(width, height int, collection
 	var extension string
 	if saveAsPng {
 		extension = "png"
+	} else if saveAsGif{
+			extension = "gif"
 	} else {
 		extension = "jpg"
 	}

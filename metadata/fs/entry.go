@@ -9,7 +9,7 @@ import (
 	"github.com/alephao/nftool/utils"
 )
 
-func GenerateMetadata(collectionPath, configPath, outDir string, use1155Pattern bool) error {
+func GenerateMetadata(collectionPath, configPath, outDir, startingIndex int, string, use1155Pattern bool) error {
 	traitCollection, err := traits_fs.LoadTraitCollectionFromFile(collectionPath)
 	if err != nil {
 		return fmt.Errorf("failed to load collection file at '%s': %s", collectionPath, err.Error())
@@ -20,13 +20,15 @@ func GenerateMetadata(collectionPath, configPath, outDir string, use1155Pattern 
 		return fmt.Errorf("failed to load config file at '%s': %s", configPath, err.Error())
 	}
 
-	metadataItems := domain.GenerateMetadata(traitCollection, config.Name, config.Description, config.Image, config.ExternalLink)
+	metadataItems := domain.GenerateMetadata(traitCollection, config.Name, config.Description, config.Image, config.ExternalLink, config.BackgroundColor, config.AnimationUrl)
 
 	for i, item := range metadataItems {
 		var fileName string
 		if use1155Pattern {
 			fileName = fmt.Sprintf("%064x", i)
-		} else {
+		} else if startNum {
+			fileName = strconv.Itoa(i+startNum)
+		}else {
 			fileName = strconv.Itoa(i)
 		}
 		err = utils.WriteFileAsJson(item, fmt.Sprintf("%s/%s", outDir, fileName))

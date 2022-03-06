@@ -4,25 +4,25 @@ A suite of tools for NFT generative art.
 
 ## Features
 
-* Metadata
-   * Generate ERC-721 and ERC-1155 compatible metadata
-* Traits/Attributes/Properties Generation
-   * Configure custom rarity
-   * Generate collection attributes configuration file
-   * Merge collections
-   * Shuffle collection
-   * Find collisions between collections
-* Image Generation
-   * Generate images from collection description
-   * Generate images in parallel
-   * Generate only missing images (if you delete a few images from the output folder)
-* Rarity
-   * Generate traits rarity
-   * Generate collection rarity
-* Provenance
-   * Generate provenance
-* OpenSea
-   * Update metadata of collection
+- Metadata
+  - Generate ERC-721 and ERC-1155 compatible metadata
+- Traits/Attributes/Properties Generation
+  - Configure custom rarity
+  - Generate collection attributes configuration file
+  - Merge collections
+  - Shuffle collection
+  - Find collisions between collections
+- Image Generation
+  - Generate images from collection description
+  - Generate images in parallel
+  - Generate only missing images (if you delete a few images from the output folder)
+- Rarity
+  - Generate traits rarity
+  - Generate collection rarity
+- Provenance
+  - Generate provenance
+- OpenSea
+  - Update metadata of collection
 
 ## Install
 
@@ -46,7 +46,7 @@ To get started, install `nftool` following the instructions above and cd to the 
 
 You can always use `nftool help [command]` to see all the documentatio and all the options of a command.
 
-First generate the configuration file from the layers folders.
+### First generate the configuration file from the layers folders.
 
 ```sh
 mkdir -p out
@@ -59,6 +59,17 @@ Then generate a collection from the `config.yaml`
 
 ```sh
 nftool traits make --amount 10 --config ./out/config.yaml --out ./out/collection.json
+```
+
+### EVP Speciality:
+
+```sh
+nftool traits make --amount 10 --config ./out/1-legendary-bull.yaml --out ./out/collection-legendary.json
+nftool traits make --amount 10 --config ./out/1-legendary-epic.yaml --out ./out/collection-epic.json
+nftool traits make --amount 10 --config ./out/1-legendary-unique.yaml --out ./out/collection-unique.json
+nftool traits make --amount 10 --config ./out/1-legendary-rare.yaml --out ./out/collection-rare.json
+nftool traits make --amount 10 --config ./out/1-legendary-common.yaml --out ./out/collection-common.json
+
 ```
 
 Now we can use the collection.json to generate the images. Run the following commands:
@@ -104,8 +115,8 @@ Check out the output in `./out/metadata/1`. If you want to change anything, you 
 
 ## Contributing
 
-* For requests and questions, please open an issue.
-* PRs accepted.
+- For requests and questions, please open an issue.
+- PRs accepted.
 
 ## Releasing
 
@@ -114,9 +125,9 @@ To release a new version
 ```
 git tag vx.x.x
 git push origin vx.x.x
-goreleaser release --rm-dist  
+goreleaser release --rm-dist
 ```
 
 ## License
 
-[MIT © Aleph Retamal](LICENSE)
+[MIT](LICENSE)
